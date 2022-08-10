@@ -7,7 +7,7 @@ const socketIo = (io) => {
     const userId = socket.handshake.query.id;
     connectedUser[userId] = socket.id;
 
-    socket.on("load messages", async (payload) => {
+    socket.on("load messages", async () => {
       try {
         const data = await Order.findAll();
         socket.emit("messages", data);
