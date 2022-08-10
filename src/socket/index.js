@@ -1,6 +1,5 @@
 const { Order } = require("../../models");
 
-const connectedUser = {};
 const socketIo = (io) => {
   io.on("connection", (socket) => {
     console.log("client connect:", socket.id);
@@ -14,10 +13,10 @@ const socketIo = (io) => {
       }
     });
 
-    socket.on("send order", async (payload) => {
+    socket.on("send order", async () => {
       try {
         console.log("socket id " + socket.id);
-        io.to(socket.id).emit("new order", idRecipient);
+        io.to(socket.id).emit("new order");
       } catch (error) {
         console.log(error);
       }
